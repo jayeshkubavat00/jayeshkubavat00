@@ -2,7 +2,7 @@
 - 👀 I’m interested in crafting elegant and efficient mobile applications that provide seamless user experiences.
 - 🌱 I’m currently learning advanced UI/UX design principles and exploring the latest trends in mobile development to stay ahead in the field.
 - 💞️ I’m looking to collaborate on exciting Flutter projects that challenge my skills and allow me to contribute meaningfully to innovative solutions.
-- 📫 You can reach me via email at jayeshkubavat00@example.com or connect with me on LinkedIn at https://www.linkedin.com/in/jayesh-kubavat-992299214/
+- 📫 You can reach me via email at jayeshkubavat00@gmail.com or connect with me on LinkedIn at https://www.linkedin.com/in/jayesh-kubavat-992299214/
 - 😄 Pronouns: He/Him
 - ⚡ Fun fact: I love experimenting with new recipes in the kitchen when I'm not coding!
 
