@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jayesh Kubavat - Flutter Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      scroll-behavior: smooth;
+      background: #fff;
+      color: #222;
+    }
+    .active {
+      color: #EF4444; 
+      font-weight: 500;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #222;
+      border-left: 6px solid #EF4444;
+      padding-left: 1rem;
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+      display: block;
+      width: 100%;
+    }
+    .skill-pill {
+      display: flex;
+      align-items: center;
+      padding: 0.35rem 0.75rem;
+      background: #f9fafb;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      color: #444;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+      font-size: 0.95rem;
+      box-shadow: none;
+      transition: background 0.2s;
+    }
+    .skill-pill:hover {
+      background: #fef2f2;
+    }
+    .project-card {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: border 0.2s;
+    }
+    .project-card:hover {
+      border-color: #EF4444;
+    }
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: #222;
+    }
+    .project-description {
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .project-tag {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      background: #f3f4f6;
+      color: #555;
+      border: 1px solid #e5e7eb;
+    }
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+    .project-link {
+      color: #EF4444;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .project-link:hover {
+      color: #b91c1c;
+    }
+    .project-status {
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+    }
+    .status-live { background: #dcfce7; color: #166534; }
+    .status-progress { background: #fef9c3; color: #a16207; }
+    .status-coming { background: #dbeafe; color: #1e40af; }
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      padding-bottom: 2rem;
+      border-left: 2px solid #e5e7eb;
+    }
+    .timeline-item:before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 0;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: #EF4444;
+      border: 3px solid #fff;
+    }
+    .timeline-date {
+      font-size: 0.95rem;
+      color: #888;
+      font-weight: 500;
+    }
+    .footer-link {
+      color: #bbb;
+      transition: color 0.2s;
+      text-decoration: underline;
+    }
+    .footer-link:hover {
+      color: #fff;
+    }
+    /* Shimmer effect for loading cards */
+    .shimmer-card {
+      background: #f3f4f6;
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      border: 1px solid #e5e7eb;
+      position: relative;
+      overflow: hidden;
+      min-height: 180px;
+    }
+    .shimmer {
+      animation: shimmer 1.5s infinite linear;
+      background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+      background-size: 200% 100%;
+      height: 20px;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+    }
+    .shimmer:last-child {
+      margin-bottom: 0;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @media (max-width: 640px) {
+      .section-title { font-size: 1.25rem; }
+      .project-card { padding: 1.25rem 1rem; }
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <!-- Header -->
+  <header class="fixed w-full bg-white shadow-sm z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="text-xl font-bold">Jayesh Kubavat</div>
+        
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="#home" class="menu-link active">Home</a>
+          <a href="#skills" class="menu-link">Skills</a>
+          <a href="#projects" class="menu-link">Projects</a>
+          <a href="#experience" class="menu-link">Experience</a>
+          <a href="#contact" class="menu-link">Contact</a>
+        </nav>
+        
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+      
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-lg rounded-b-lg">
+        <a href="#home" class="block py-2 menu-link active">Home</a>
+        <a href="#skills" class="block py-2 menu-link">Skills</a>
+        <a href="#projects" class="block py-2 menu-link">Projects</a>
+        <a href="#experience" class="block py-2 menu-link">Experience</a>
+        <a href="#contact" class="block py-2 menu-link">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero/About Section -->
+  <section id="home" class="pt-32 pb-20">
+    <div class="w-full px-4 md:px-8 flex flex-col md:flex-row items-center">
+      <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFZnaB1bva5Bg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728837138857?e=1757548800&v=beta&t=UeKFGCaM81TNtBr8dIy14juRyAf6Asdez3sD76NqLro" alt="Jayesh Kubavat" class="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover shadow-lg">
+      </div>
+      <div class="md:w-2/3 md:pl-12 text-center md:text-left">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4">Hi, I'm Jayesh,<br>Flutter Developer</h1>
+        <p class="text-lg text-gray-600 mb-6">
+          I'm a passionate Flutter developer with 2.5+ years of experience in building high-quality mobile applications. 
+          I specialize in creating beautiful, performant, and user-friendly apps that deliver exceptional user experiences.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+          <a href="#" id="download-resume" class="bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition duration-300 text-center">
+            Download Resume
+          </a>
+          <div class="flex justify-center space-x-4">
+            <a href="#" class="text-gray-700 hover:text-red-600 transition duration-300" aria-label="GitHub">
+              <i class="fab fa-github text-2xl"></i>
+            </a>
+            <a href="#" class="text-gray-700 hover:text-red-600 transition duration-300" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in text-2xl"></i>
+            </a>
+            <a href="#" class="text-gray-700 hover:text-red-600 transition duration-300" aria-label="Twitter">
+              <i class="fab fa-twitter text-2xl"></i>
+            </a>
+            <a href="#" class="text-gray-700 hover:text-red-600 transition duration-300" aria-label="Instagram">
+              <i class="fab fa-instagram text-2xl"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-16 bg-gray-50">
+    <div class="w-full px-6 md:px-20">
+      <h2 class="section-title mb-6 text-left">Skills</h2>
+      <div class="space-y-8">
+        <!-- Frontend Development -->
+        <div>
+          <h3 class="font-semibold mb-3 text-base flex items-center">📱 <span class="ml-2">Frontend Development</span></h3>
+          <div class="flex flex-wrap gap-2">
+            <div class="skill-pill"><span>Flutter</span></div>
+            <div class="skill-pill"><span>Dart</span></div>
+            <div class="skill-pill"><span>Custom UI</span></div>
+            <div class="skill-pill"><span>Figma</span></div>
+          </div>
+        </div>
+        <!-- Backend & APIs -->
+        <div>
+          <h3 class="font-semibold mb-3 text-base flex items-center">🔌 <span class="ml-2">Backend & APIs</span></h3>
+          <div class="flex flex-wrap gap-2">
+            <div class="skill-pill"><span>Node.js</span></div>
+            <div class="skill-pill"><span>MongoDB</span></div>
+            <div class="skill-pill"><span>REST APIs</span></div>
+            <div class="skill-pill"><span>AI API Integration</span></div>
+          </div>
+        </div>
+        <!-- State Management & Architecture -->
+        <div>
+          <h3 class="font-semibold mb-3 text-base flex items-center">🧠 <span class="ml-2">State Management & Architecture</span></h3>
+          <div class="flex flex-wrap gap-2">
+            <div class="skill-pill"><span>Riverpod</span></div>
+            <div class="skill-pill"><span>Provider</span></div>
+            <div class="skill-pill"><span>GetX</span></div>
+            <div class="skill-pill"><span>Clean Architecture</span></div>
+          </div>
+        </div>
+        <!-- Tools & DevOps -->
+        <div>
+          <h3 class="font-semibold mb-3 text-base flex items-center">🚀 <span class="ml-2">Tools & DevOps</span></h3>
+          <div class="flex flex-wrap gap-2">
+            <div class="skill-pill"><span>Firebase</span></div>
+            <div class="skill-pill"><span>Git & GitHub</span></div>
+            <div class="skill-pill"><span>App Deployment</span></div>
+            <div class="skill-pill"><span>Google Maps API</span></div>
+            <div class="skill-pill"><span>TTS / STT</span></div>
+            <div class="skill-pill"><span>ZegoCloud</span></div>
+          </div>
+        </div>
+        <!-- Soft Skills & Workflow -->
+        <div>
+          <h3 class="font-semibold mb-3 text-base flex items-center">🗣️ <span class="ml-2">Soft Skills & Workflow</span></h3>
+          <div class="flex flex-wrap gap-2">
+            <div class="skill-pill"><span>Client Communication</span></div>
+            <div class="skill-pill"><span>Agile Workflow</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-16 bg-gray-50">
+    <div class="w-full px-6 md:px-20">
+      <h2 class="section-title">Featured Projects</h2>
+      <h3 class="text-lg font-semibold mb-4 mt-8">Key Projects</h3>
+      <!-- Existing Key Projects Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="key-projects">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div class="project-content">
+            <div class="project-header">
+              <div class="project-header-text">
+                <h3 class="project-title">School Management Mobile App</h3>
+              </div>
+            </div>
+            <p class="project-description">
+              I developed both the student and teacher apps using Flutter for a complete school management solution. The apps include features like attendance, assignments, fee tracking, and real-time notifications. Currently used by 5000+ students across 15+ schools.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">Firebase</span>
+              <span class="project-tag">GetX</span>
+              <span class="project-tag">REST API Integration</span>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link">
+                View Project
+              </a>
+              <span class="project-status status-live">Live</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div class="project-content">
+            <div class="project-header">
+              <div class="project-header-text">
+                <h3 class="project-title">Authencation & Reimbursement Plugin For Flutter</h3>
+              </div>
+            </div>
+            <p class="project-description">
+              Built a reusable Flutter plugin for authentication and reimbursement management. Integrated CyberArk for secure login and implemented a smooth workflow for submitting and tracking employee claims. Designed with advanced state management and API handling for scalable use in enterprise apps.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">Provider</span>
+              <span class="project-tag">REST API Integration</span>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link">
+                View Project
+              </a>
+              <span class="project-status status-progress">Completed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+          <div class="project-content">
+            <div class="project-header">
+              <div class="project-header-text">
+                <h3 class="project-title">LinkedIn Clone For Teachers</h3>
+              </div>
+            </div>
+            <p class="project-description">
+              Contributing to a LinkedIn-style Flutter app focused on professional networking. Developed the profile module (certificates, education, experience, interests) and a full-featured courses module with video playback, enrollment, and progress tracking. Designed for seamless learning and career growth.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">Firebase</span>
+              <span class="project-tag">REST API Integration</span>
+              <span class="project-tag">Bloc</span>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link">
+                View Project
+              </a>
+              <span class="project-status status-coming">Completed</span>
+            </div>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="project-card">
+          <div class="project-content">
+            <div class="project-header">
+              <div class="project-header-text">
+                <h3 class="project-title">Instant Payment App</h3>
+              </div>
+            </div>
+            <p class="project-description">
+              Working on a secure Flutter-based instant payment app, handling user registration with drop-off recovery, add bank flow, and scan-to-pay functionality. Integrated encrypted API responses with robust device binding for enhanced transaction security and seamless payment experiences.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">Firebase</span>
+              <span class="project-tag">REST API Integration</span>
+              <span class="project-tag">Bloc</span>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link">
+                View Project
+              </a>
+              <span class="project-status status-coming">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3 class="text-lg font-semibold mb-4 mt-12">GitHub Projects</h3>
+      <div id="github-projects" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Shimmer placeholders here -->
+      </div>
+      <div class="flex justify-center mt-6 gap-4">
+        <button id="show-more-github" class="text-red-600 hover:underline font-medium text-base transition duration-200" style="display:none; background:none; border:none; padding:0;">
+          Show More
+        </button>
+        <button id="show-less-github" class="text-red-600 hover:underline font-medium text-base transition duration-200" style="display:none; background:none; border:none; padding:0;">
+          Show Less
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="py-16 bg-white">
+    <div class="w-full px-6 md:px-20">
+      <h2 class="section-title mb-10">Work Experience</h2>
+      <div class="space-y-8">
+        <!-- Experience 1 -->
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+            <h3 class="text-lg font-semibold text-gray-800">Senior Flutter Developer</h3>
+            <span class="text-sm font-medium text-gray-500">2023 - Present</span>
+          </div>
+          <div class="mb-3">
+            <h4 class="text-gray-700 font-medium">Tech Solutions Inc.</h4>
+          </div>
+          <ul class="list-disc list-inside text-gray-600 text-sm space-y-1.5">
+            <li>Led a team of 5 developers in building cross-platform mobile applications</li>
+            <li>Implemented CI/CD pipelines reducing deployment time by 40%</li>
+            <li>Mentored junior developers and conducted code reviews</li>
+          </ul>
+        </div>
+        <!-- Experience 2 -->
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+            <h3 class="text-lg font-semibold text-gray-800">Flutter Developer</h3>
+            <span class="text-sm font-medium text-gray-500">2021 - 2023</span>
+          </div>
+          <div class="mb-3">
+            <h4 class="text-gray-700 font-medium">Digital Innovations Ltd.</h4>
+          </div>
+          <ul class="list-disc list-inside text-gray-600 text-sm space-y-1.5">
+            <li>Developed and launched 10+ mobile applications with over 100k downloads</li>
+            <li>Integrated RESTful APIs and third-party services</li>
+            <li>Improved app performance by 30% through optimization</li>
+          </ul>
+        </div>
+        <!-- Experience 3 -->
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+            <h3 class="text-lg font-semibold text-gray-800">Junior Mobile Developer</h3>
+            <span class="text-sm font-medium text-gray-500">2019 - 2021</span>
+          </div>
+          <div class="mb-3">
+            <h4 class="text-gray-700 font-medium">AppWorks Solutions</h4>
+          </div>
+          <ul class="list-disc list-inside text-gray-600 text-sm space-y-1.5">
+            <li>Assisted in developing and maintaining mobile applications</li>
+            <li>Fixed bugs and implemented new features</li>
+            <li>Participated in agile development processes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-white">
+    <div class="w-full px-6 md:px-20">
+      <h2 class="section-title">Get In Touch</h2>
+      
+      <div class="mt-12">
+        <form id="contactForm" class="space-y-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name <span class="text-red-500">*</span></label>
+            <input type="text" id="name" name="name" required
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              placeholder="Your name">
+            <p id="nameError" class="mt-1 text-sm text-red-600 hidden">Please enter your name</p>
+          </div>
+          
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
+            <input type="email" id="email" name="email" required
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              placeholder="your.email@example.com">
+            <p id="emailError" class="mt-1 text-sm text-red-600 hidden">Please enter a valid email address</p>
+          </div>
+          
+          <div>
+            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+            <input type="text" id="subject" name="subject"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              placeholder="How can I help you?">
+          </div>
+          
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message <span class="text-red-500">*</span></label>
+            <textarea id="message" name="message" rows="4" required minlength="10"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              placeholder="Your message here..."></textarea>
+            <p id="messageError" class="mt-1 text-sm text-red-600 hidden">Message must be at least 10 characters long</p>
+          </div>
+          
+          <div>
+            <button type="submit"
+              class="px-6 py-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors">
+              Send Message
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white pt-12 pb-6 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-10 mb-10">
+        <!-- About & Social -->
+        <div>
+          <div class="flex items-center mb-4">
+            <span class="bg-red-500 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold mr-3">J</span>
+            <span class="text-2xl font-semibold">Jayesh Kubavat</span>
+          </div>
+          <p class="text-gray-400 mb-6 max-w-xs">
+            Flutter Developer creating beautiful, performant mobile applications with a focus on user experience.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="hover:bg-gray-800 p-2 rounded-full transition" aria-label="GitHub">
+              <i class="fab fa-github text-2xl text-gray-300 hover:text-white"></i>
+            </a>
+            <a href="#" class="hover:bg-gray-800 p-2 rounded-full transition" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in text-2xl text-gray-300 hover:text-white"></i>
+            </a>
+            <a href="#" class="hover:bg-gray-800 p-2 rounded-full transition" aria-label="Twitter">
+              <i class="fab fa-twitter text-2xl text-gray-300 hover:text-white"></i>
+            </a>
+            <a href="#" class="hover:bg-gray-800 p-2 rounded-full transition" aria-label="Instagram">
+              <i class="fab fa-instagram text-2xl text-gray-300 hover:text-white"></i>
+            </a>
+          </div>
+        </div>
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+            <li><a href="#skills" class="text-gray-400 hover:text-white transition">Skills</a></li>
+            <li><a href="#projects" class="text-gray-400 hover:text-white transition">Projects</a></li>
+            <li><a href="#experience" class="text-gray-400 hover:text-white transition">Experience</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-6 text-center">
+        <p class="text-gray-500 text-sm">&copy; 2025 Jayesh Kubavat. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuLinks = document.querySelectorAll('.menu-link');
+    
+    // Toggle mobile menu
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Close mobile menu when a link is clicked
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+    
+    // Active menu link on scroll
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY;
+      
+      document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          menuLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Resume download
+    document.getElementById('download-resume').addEventListener('click', (e) => {
+      e.preventDefault();
+      // Replace with actual resume URL
+      const resumeUrl = 'https://drive.google.com/file/d/1XYkmcBMIqcpWE0XV5bbADlxjJe8bXFIu/view?usp=sharing'; // Add your resume URL here
+      if (resumeUrl !== '#') {
+        window.open(resumeUrl, '_blank');
+      } else {
+        alert('Resume link will be added soon!');
+      }
+    });
+    
+    // Contact Form Validation
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Reset previous errors
+      document.querySelectorAll('.error-message').forEach(el => el.classList.add('hidden'));
+      
+      // Get form values
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      let isValid = true;
+      
+      // Validate name
+      if (name === '') {
+        document.getElementById('nameError').classList.remove('hidden');
+        isValid = false;
+      }
+      
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('emailError').classList.remove('hidden');
+        isValid = false;
+      }
+      
+      // Validate message
+      if (message.length < 10) {
+        document.getElementById('messageError').classList.remove('hidden');
+        isValid = false;
+      }
+      
+      // If form is valid, you can submit it
+      if (isValid) {
+        // Here you would typically send the form data to a server
+        alert('Thank you for your message! I will get back to you soon.');
+        this.reset();
+      }
+    });
+    
+    // Real-time validation
+    document.getElementById('name').addEventListener('input', function() {
+      if (this.value.trim() !== '') {
+        document.getElementById('nameError').classList.add('hidden');
+      }
+    });
+    
+    document.getElementById('email').addEventListener('input', function() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailRegex.test(this.value.trim())) {
+        document.getElementById('emailError').classList.add('hidden');
+      }
+    });
+    
+    document.getElementById('message').addEventListener('input', function() {
+      if (this.value.trim().length >= 10) {
+        document.getElementById('messageError').classList.add('hidden');
+      }
+    });
+  </script>
+  <script>
+    // Fetch and display GitHub projects
+    fetch('https://api.github.com/users/jayeshkubavat00/repos')
+      .then(response => response.json())
+      .then(repos => {
+        const githubProjectsDiv = document.getElementById('github-projects');
+        const showMoreBtn = document.getElementById('show-more-github');
+        const showLessBtn = document.getElementById('show-less-github');
+        githubProjectsDiv.innerHTML = ''; // Remove shimmer
+
+        // Filter only public, non-forked repos
+        const filtered = repos.filter(repo => !repo.fork && !repo.private);
+
+        // Function to render repos (accepts how many to show)
+        function renderRepos(count) {
+          githubProjectsDiv.innerHTML = '';
+          filtered.slice(0, count).forEach(repo => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.innerHTML = `
+              <div class="project-content">
+                <div class="project-header">
+                  <div class="project-header-text">
+                    <h3 class="project-title">${repo.name}</h3>
+                  </div>
+                </div>
+                <p class="project-description">${repo.description ? repo.description : 'No description provided.'}</p>
+                <div class="project-tags">
+                  <span class="project-tag">${repo.language ? repo.language : 'N/A'}</span>
+                </div>
+                <div class="project-footer">
+                  <a href="${repo.html_url}" class="project-link" target="_blank" rel="noopener">
+                    View on GitHub
+                  </a>
+                  <span class="project-status status-live">${repo.visibility ? repo.visibility : 'Public'}</span>
+                </div>
+              </div>
+            `;
+            githubProjectsDiv.appendChild(card);
+          });
+        }
+
+        // Initial render: show 3
+        renderRepos(3);
+
+        // Show More/Less logic
+        if (filtered.length > 3) {
+          showMoreBtn.style.display = '';
+          showLessBtn.style.display = 'none';
+
+          showMoreBtn.onclick = function() {
+            renderRepos(filtered.length);
+            showMoreBtn.style.display = 'none';
+            showLessBtn.style.display = '';
+          };
+
+          showLessBtn.onclick = function() {
+            renderRepos(3);
+            showMoreBtn.style.display = '';
+            showLessBtn.style.display = 'none';
+          };
+        }
+      });
+  </script>
+</body>
+</html>
